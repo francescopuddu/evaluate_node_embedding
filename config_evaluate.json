@@ -1,0 +1,5 @@
+{
+    "embedding_path": "./emb/blogcatalog_enhanced.emb",
+    "labels_path": "./labels.txt",
+    "shuffles": 4
+}
