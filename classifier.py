@@ -116,7 +116,7 @@ def evaluate(config_path):
 			all_results[train_percent].append(results)
 
 	print('-------------------')
-	print('Train percent:', args.metric)
+	print('Train percent :', 'metric value')
 
 	for train_percent in sorted(all_results.keys()):
 		av = 0

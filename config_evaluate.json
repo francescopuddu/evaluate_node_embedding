@@ -1,6 +1,6 @@
 {
-    "embedding_path": "./emb/blogcatalog_enhanced.emb",
-    "labels_path": "./labels.txt",
+    "embedding_path": "./data/example_embedding.txt",
+    "labels_path": "./data/cora_labels.txt",
     "shuffles": 4,
     "metric" : "micro"
 }
