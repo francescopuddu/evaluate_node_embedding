@@ -34,6 +34,7 @@ class ClassificationArguments():
             self.emb = conf["embedding_path"]
             self.label = conf["labels_path"]
             self.shuffle = conf["shuffles"]
+            self.metric = conf["metric"]
 
 def load_embeddings(embeddings_file):
     '''
@@ -115,16 +116,16 @@ def evaluate(config_path):
 			all_results[train_percent].append(results)
 
 	print('-------------------')
-	print('Train percent:', 'micro-f1')
+	print('Train percent:', args.metric)
 
 	for train_percent in sorted(all_results.keys()):
 		av = 0
 		stder = np.ones(number_shuffles)
 		i = 0
 		for x in all_results[train_percent]:
-			stder[i] = x["micro"]
+			stder[i] = x[args.metric]
 			i += 1
-			av += x["micro"]
+			av += x[args.metric]
 		av /= number_shuffles
 		print(train_percent, ":", av)
 
