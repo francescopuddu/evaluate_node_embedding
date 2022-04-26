@@ -1,6 +1,6 @@
 # Test Node Embeddings 
 
-Following the standard testing approach from the field, this component implements a classification algorithm to evaluate the output of a node-embedding model when labeled data is available. 
+Following the standard testing approach from the field, this component implements a classification algorithm to evaluate the output of a node-embedding model when labeled data is available. Results can be visualized either on the command line or with Tensorboard. 
 
 ## High level description
 - Inputs:  the feature map (node --> latent vector), the labels map (label --> nodes) and the desired classification metric
@@ -41,32 +41,37 @@ The json file storing the parameters for the classifier is expected to contain t
 - The path to the text file containing the labels in the specified format
 - The number of shuffles to perform on data during the evaluation of the classification metric
 - The selected classification metric (for the options refer to the scikit-learn documentation linked above)
+- The name for the experiment in case the visualization on Tensorboard is preferred (leaving this field empty is equivalent to choosing to visualize the output on the command line)
 <pre>
 {
     "embedding_path": "path/to/embedding/file",
     "labels_path": "path/to/labels/file",
     "shuffles": 4,
-    "metric" : "micro"
+    "metric" : "micro",
+    "experiment_name" : "abc"
 }
 </pre>
 <br/>
 
 ### Usage guidelines
 To set up the environment, a requirements.txt file is provided. 
-The module can be used by simply running "classifier.py"; the only requested command line argument is the path to the configuration file. 
+The module can be used by simply running "classifier.py". The only requested command line argument is the path to the configuration file, if none is provided then the script will look for "config.json" in the current directory by default. 
 
 
 The repository provides the input files to run the module on example data. The embeddings come from the reference implementation of ProNE [3] on the well known Cora benchmark [4]. 
 
 To run the example: 
 <pre>
-python classifier.py config_example.json
+python classifier.py
 </pre>
 
-The correct output looks like this: 
+The correct output should look similar to this: 
+
+On Tensorboard: 
+![tensorboard](https://i.ibb.co/jMHhL5G/Immagine-2022-04-26-142236.png "Tensorboard")
+
+On command line: 
 <pre>
-Embeddings successfully loaded.
-Labels successfully loaded.
 -------------------
 Train percent : metric value
 0.1 : 0.613515176374077
