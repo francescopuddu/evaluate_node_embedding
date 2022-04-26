@@ -8,6 +8,8 @@ from collections import defaultdict
 from sklearn.metrics import f1_score
 import json
 import sys
+import warnings
+warnings.filterwarnings("ignore")
 
 class TopKRanker(OneVsRestClassifier):
 
