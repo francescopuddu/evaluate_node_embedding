@@ -1,7 +1,7 @@
 {
-    "embedding_path": "./data/example_embedding.txt",
-    "labels_path": "./data/cora_labels.txt",
+    "embedding_path": "./data/line_wiki.txt",
+    "labels_path": "./data/wiki_labels.txt",
     "shuffles": 4,
     "metric" : "micro",
-    "experiment_name" : "prone_wiki"
+    "experiment_name" : "line_wiki"
 }
