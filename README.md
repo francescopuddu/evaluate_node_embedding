@@ -65,10 +65,10 @@ To run the example:
 python classifier.py
 </pre>
 
-The correct output looks like this: 
+The correct output should look similar to this: 
 
 On Tensorboard: 
-![tensorboard](https://i.ibb.co/ZM78SbP/Immagine-2022-04-26-141543.png "Tensorboard")
+![tensorboard](https://i.ibb.co/jMHhL5G/Immagine-2022-04-26-142236.png "Tensorboard")
 
 On command line: 
 <pre>
