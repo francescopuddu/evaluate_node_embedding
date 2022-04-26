@@ -2,5 +2,6 @@
     "embedding_path": "./data/example_embedding.txt",
     "labels_path": "./data/cora_labels.txt",
     "shuffles": 4,
-    "metric" : "micro"
+    "metric" : "micro",
+    "experiment_name" : "prone_wiki"
 }

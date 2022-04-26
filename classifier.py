@@ -11,6 +11,9 @@ import sys
 import warnings
 warnings.filterwarnings("ignore")
 
+from tensorboardX import SummaryWriter
+from datetime import datetime
+
 class TopKRanker(OneVsRestClassifier):
 
 	def predict(self, X, top_k_list):
@@ -37,6 +40,7 @@ class ClassificationArguments():
             self.label = conf["labels_path"]
             self.shuffle = conf["shuffles"]
             self.metric = conf["metric"]
+            self.experiment_name = conf["experiment_name"]
 
 def load_embeddings(embeddings_file):
     '''
@@ -117,8 +121,12 @@ def evaluate(config_path):
 
 			all_results[train_percent].append(results)
 
-	print('-------------------')
-	print('Train percent :', 'metric value')
+	if len(args.experiment_name) > 0:
+		writer = SummaryWriter("./tensorboard/" + args.experiment_name + "__" + datetime.now().strftime("%Y%m%d-%H%M%S"))
+		print("Starting tensorboard.")
+	else:
+		print('-------------------')
+		print('Train percent :', 'metric value')
 
 	for train_percent in sorted(all_results.keys()):
 		av = 0
@@ -129,8 +137,16 @@ def evaluate(config_path):
 			i += 1
 			av += x[args.metric]
 		av /= number_shuffles
-		print(train_percent, ":", av)
+		if len(args.experiment_name) > 0:
+			writer.add_scalar("f1", av, global_step=int(train_percent*100)) 
+		else:
+			print(train_percent, ":", av)
 
 if __name__ == '__main__':
-	conf_path = sys.argv[1]
+
+	if len(sys.argv) == 2: 
+		conf_path = sys.argv[1]
+	else:
+		conf_path = "config.json"
 	evaluate(conf_path)
+	print("Test completed successfully.")
