@@ -43,12 +43,7 @@ class ClassificationArguments():
             self.experiment_name = conf["experiment_name"]
 
 def load_embeddings(embeddings_file):
-    '''
-    Load embeddings from word2vec format file: 
-    format: 
-    #rows #features
-    #node_id 0.00111 0.38372 0.827262 8.838 ...
-    '''
+
     model = KeyedVectors.load_word2vec_format(embeddings_file, binary=False)
     features_matrix = np.asarray([model[str(node)] for node in range(len(model.index_to_key))])
 
@@ -57,11 +52,7 @@ def load_embeddings(embeddings_file):
     return features_matrix
 
 def load_labels(labels_file, nodesize):
-	'''
-	Load embeddings from file: 
-	format: 
-	#label_id /tab #node_id1 /tab #node_id2 ...
-	'''
+
 	with open(labels_file) as f:    
 		context = f.readlines()
 		label = sparse.lil_matrix((nodesize, len(context)))
